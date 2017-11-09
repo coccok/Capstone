@@ -1,0 +1,11 @@
+data1=load('betamathproblem.txt');
+Fs=1000; %Sampling frequency
+L=length(data1); %Length of signal
+T=1/Fs; %Time between smaples
+f1=fft(data1(:,2:2));%FFt of data
+t=(0:L-1)*T;  %total time
+P2 = abs(f1/L);
+P1 = P2(1:L/2+1);
+P1(2:end-1) = 2*P1(2:end-1); %half-sided frequency spectrum
+f = Fs*(0:(L/2))/L; %normalized frequency
+Centroid=sum(f.*P1')/sum(P1) %centroid frequency
